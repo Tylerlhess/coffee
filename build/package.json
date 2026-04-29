@@ -1,0 +1,25 @@
+{
+  "name": "coffee-extension",
+  "version": "1.0.0",
+  "description": "Chrome extension for evaluating news articles and highlighting facts, opinions, fallacies, and evidence",
+  "main": "manifest.json",
+  "scripts": {
+    "test": "node test-extension.js",
+    "build": "chmod +x build.sh && ./build.sh"
+  },
+  "keywords": [
+    "chrome-extension",
+    "news",
+    "fact-checking",
+    "media-literacy",
+    "critical-thinking",
+    "ai",
+    "coffee"
+  ],
+  "author": "Coffee Extension Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/username/coffee-extension/issues"
+  },
+  "homepage": "https://github.com/username/coffee-extension#readme"
+}

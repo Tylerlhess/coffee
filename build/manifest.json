@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Coffee - News Fact Checker",
+  "version": "1.0.0",
+  "description": "Evaluate news articles for facts, opinions, fallacies, and evidence. Wake up to critical thinking.",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Coffee - Analyze This!"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icon128.png",
+    "48": "icon128.png",
+    "128": "icon128.png"
+  }
+}
