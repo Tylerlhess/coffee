@@ -1,4 +1,7 @@
-# Coffee — Wake People Up to Their News
+# Coffee — Clarifying Opinions, Fallacies, Facts. Evaluating Evidence.
+
+> **COFFEE** — **C**larifying **O**pinions **F**allacies **F**acts. **E**valuating **E**vidence  
+> *Wake people up to their news.*
 
 Coffee is a browser extension designed to help people critically evaluate what they read online — news articles, social-media threads, and other web content — by separating facts from opinions, surfacing logical fallacies, and prompting deeper investigation. The goal is media literacy and critical thinking: not to hand you verdicts, but to give you tools to scrutinize the information in front of you.
 

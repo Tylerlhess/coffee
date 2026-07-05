@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Coffee — Wake People Up to Their News",
+  "name": "Coffee — Clarifying Opinions, Fallacies, Facts. Evaluating Evidence.",
   "version": "0.1.0",
   "description": "Detects argumentative language, opinions-presented-as-fact, and logical fallacies on articles and social feeds, then queries an LLM (OpenAI / MCP standards) for analysis.",
   "minimum_chrome_version": "116",
