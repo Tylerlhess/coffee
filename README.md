@@ -1,7 +1,18 @@
-# 🔍 Discern — Sort Opinion from Fact
+# Coffee — Wake People Up to Their News
 
-A Manifest V3 browser extension that helps readers cut through confusing or
-misleading social-media threads and articles. It:
+Coffee is a browser extension designed to help people critically evaluate what they read online — news articles, social-media threads, and other web content — by separating facts from opinions, surfacing logical fallacies, and prompting deeper investigation. The goal is media literacy and critical thinking: not to hand you verdicts, but to give you tools to scrutinize the information in front of you.
+
+### What Coffee aims to do
+
+1. **Fact identification** — Highlight factual claims, distinguish them from opinion, and flag when opinions are presented as facts.
+2. **Opinion detection** — Identify subjective or argumentative language so you know where the author is stating a view rather than reporting.
+3. **Logical fallacy detection** — Spot common reasoning errors and explain why a line of argument may be weak.
+4. **Evidence & research** — Point you toward supporting or contradicting evidence and suggest lines of inquiry.
+5. **AI-powered investigation** — Send page content to a language model for a structured summary of claims, fallacies, and follow-up questions.
+
+The current codebase implements this vision as **Discern** — a Manifest V3 extension with no build step, no bundler, and no runtime dependencies (vanilla ES modules only, which keeps the supply chain trivially auditable).
+
+Discern:
 
 - **Highlights argumentative language** in-page using fast local pattern matching
   (opinion markers, overstated certainty, sweeping generalizations, prescriptive
@@ -17,9 +28,6 @@ misleading social-media threads and articles. It:
   **"Ask Grok"** action that drops a question into the X reply composer.
 - Is built as an **extensible agent system** so research and fact-check agents
   can be added without touching the transport or UI layers.
-
-No build step. No bundler. No runtime dependencies — vanilla ES modules only,
-which keeps the supply chain trivially auditable.
 
 ---
 
@@ -158,6 +166,26 @@ the same file.
 
 ---
 
+## Roadmap
+
+### Phase 1: Core analysis
+- [x] Extension structure and page content extraction
+- [x] Local opinion/fallacy highlighting
+- [x] LLM-powered fact/opinion/fallacy analysis
+- [x] X/Twitter thread adapter and Grok integration
+
+### Phase 2: Research agents
+- [ ] Evidence search and source reliability scoring
+- [ ] Cross-referencing with multiple sources
+- [ ] Research and fact-check agents (scaffolds in place)
+
+### Phase 3: Advanced features
+- [ ] Additional site adapters (Reddit, YouTube comments, etc.)
+- [ ] Sentiment and bias profiling
+- [ ] Social sharing of analyses
+
+---
+
 ## Testing
 
 The pure pipeline runs in Node with no extension context:
@@ -179,6 +207,13 @@ node --check src/**/*.js                 # syntax
   **Questions** sections are for.
 - The system prompt instructs the model to stay neutral and to avoid taking an
   ideological side.
+
+---
+
+## Contributing
+
+Feel free to fork the repository and submit pull requests. For questions or
+feedback, open an issue.
 
 ## License
 
