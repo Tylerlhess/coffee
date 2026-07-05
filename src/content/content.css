@@ -1,8 +1,8 @@
 /* Content-script styles: highlight marks, floating toolbar, toast.
-   Namespaced under .discern-* / #discern-* to minimize collisions with hosts.
+   Namespaced under .coffee-* / #coffee-* to minimize collisions with hosts.
    (The response modal is fully isolated in its own shadow root.) */
 
-.discern-mark {
+.coffee-mark {
   background: transparent;
   color: inherit;
   border-bottom: 2px solid transparent;
@@ -10,14 +10,14 @@
   cursor: help;
   padding: 0 1px;
 }
-.discern-mark[data-discern="opinion"]        { background: rgba(99, 102, 241, 0.18); border-bottom-color: #6366f1; }
-.discern-mark[data-discern="certainty"]      { background: rgba(234, 179, 8, 0.22);  border-bottom-color: #eab308; }
-.discern-mark[data-discern="generalization"] { background: rgba(249, 115, 22, 0.20); border-bottom-color: #f97316; }
-.discern-mark[data-discern="prescriptive"]   { background: rgba(20, 184, 166, 0.18); border-bottom-color: #14b8a6; }
-.discern-mark[data-discern="loaded"]         { background: rgba(236, 72, 153, 0.18); border-bottom-color: #ec4899; }
-.discern-mark[data-discern="fallacy"]        { background: rgba(239, 68, 68, 0.22);  border-bottom-color: #ef4444; }
+.coffee-mark[data-coffee="opinion"]        { background: rgba(99, 102, 241, 0.18); border-bottom-color: #6366f1; }
+.coffee-mark[data-coffee="certainty"]      { background: rgba(234, 179, 8, 0.22);  border-bottom-color: #eab308; }
+.coffee-mark[data-coffee="generalization"] { background: rgba(249, 115, 22, 0.20); border-bottom-color: #f97316; }
+.coffee-mark[data-coffee="prescriptive"]   { background: rgba(20, 184, 166, 0.18); border-bottom-color: #14b8a6; }
+.coffee-mark[data-coffee="loaded"]         { background: rgba(236, 72, 153, 0.18); border-bottom-color: #ec4899; }
+.coffee-mark[data-coffee="fallacy"]        { background: rgba(239, 68, 68, 0.22);  border-bottom-color: #ef4444; }
 
-#discern-toolbar {
+#coffee-toolbar {
   position: fixed;
   right: 16px;
   bottom: 16px;
@@ -26,7 +26,7 @@
   gap: 6px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
-#discern-toolbar button {
+#coffee-toolbar button {
   cursor: pointer;
   border: none;
   border-radius: 999px;
@@ -37,9 +37,9 @@
   padding: 9px 14px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
-#discern-toolbar button:hover { background: #1e293b; }
+#coffee-toolbar button:hover { background: #1e293b; }
 
-#discern-toast {
+#coffee-toast {
   position: fixed;
   left: 50%;
   bottom: 70px;
@@ -56,4 +56,4 @@
   pointer-events: none;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
-#discern-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+#coffee-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }

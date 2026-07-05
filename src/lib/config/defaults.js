@@ -1,5 +1,5 @@
 /**
- * Default configuration for the Discern extension.
+ * Default configuration for the Coffee extension.
  *
  * The config is intentionally provider-agnostic. Two transport standards are
  * supported out of the box:

@@ -25,7 +25,7 @@ export const researchAgent = {
   async run(input, ctx) {
     const { config } = ctx;
     if (!config.agents?.research) {
-      return disabled('Research agent is off. Enable it in Discern settings once a research-capable tool is configured.');
+      return disabled('Research agent is off. Enable it in Coffee settings once a research-capable tool is configured.');
     }
 
     const claims = (input.claims || []).slice(0, 5).map((c) => c.text || c).filter(Boolean);

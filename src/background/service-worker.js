@@ -10,14 +10,14 @@ import { getAgent, listAgents } from '../lib/agents/registry.js';
 import { testProvider } from '../lib/api/provider.js';
 import { log } from '../lib/util/logger.js';
 
-const CONTEXT_MENU_ID = 'discern-analyze-selection';
+const CONTEXT_MENU_ID = 'coffee-analyze-selection';
 
 // --- lifecycle -----------------------------------------------------------
 
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: CONTEXT_MENU_ID,
-    title: 'Discern: analyze selection',
+    title: 'Coffee: analyze selection',
     contexts: ['selection'],
   });
   log.info('installed');
@@ -69,7 +69,7 @@ async function handle(message) {
     case MSG.ANALYZE:
       return runAgent(payload);
 
-    case 'discern:testProvider': {
+    case 'coffee:testProvider': {
       // Called from the options page (extension context), config passed inline.
       return testProvider(payload.config);
     }

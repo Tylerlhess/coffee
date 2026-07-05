@@ -37,7 +37,7 @@ export class McpClient {
   }
 
   async _rpc(method, params, { notification = false } = {}) {
-    if (!this.endpoint) throw new Error('No MCP endpoint configured. Open Discern settings.');
+    if (!this.endpoint) throw new Error('No MCP endpoint configured. Open Coffee settings.');
     const payload = { jsonrpc: '2.0', method };
     if (params !== undefined) payload.params = params;
     if (!notification) payload.id = ++this._id;
@@ -78,7 +78,7 @@ export class McpClient {
     const result = await this._rpc('initialize', {
       protocolVersion: this.protocolVersion,
       capabilities: { tools: {} },
-      clientInfo: { name: 'Discern', version: '0.1.0' },
+      clientInfo: { name: 'Coffee', version: '0.1.0' },
     });
     await this._rpc('notifications/initialized', undefined, { notification: true });
     return result;

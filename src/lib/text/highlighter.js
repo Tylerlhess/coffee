@@ -7,8 +7,8 @@
 
 import { CATEGORY } from './detectors.js';
 
-const MARK_CLASS = 'discern-mark';
-const MARK_ATTR = 'data-discern';
+const MARK_CLASS = 'coffee-mark';
+const MARK_ATTR = 'data-coffee';
 
 const CATEGORY_COLOR = {
   [CATEGORY.OPINION]: 'opinion',
@@ -97,7 +97,7 @@ function wrapMatches(textNode, re, byPhrase) {
   return made;
 }
 
-/** Remove all Discern marks, restoring original text nodes. */
+/** Remove all Coffee marks, restoring original text nodes. */
 export function clearHighlights(root = document.body) {
   const marks = root.querySelectorAll(`.${MARK_CLASS}`);
   marks.forEach((mark) => {

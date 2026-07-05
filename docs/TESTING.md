@@ -45,5 +45,5 @@ Expected: several fallacy/opinion/generalization flags, two chat messages
    (modal with Summary/Claims/Fallacies/Questions).
 3. Open an X thread → **Analyze** → a question → **Ask Grok** drops `@grok …`
    into the reply box.
-4. Right-click selected text → **Discern: analyze selection**.
+4. Right-click selected text → **Coffee: analyze selection**.
 ```

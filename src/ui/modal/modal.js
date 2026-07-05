@@ -12,7 +12,7 @@ const TABS = [
   { id: 'questions', label: 'Questions', countKey: 'questions' },
 ];
 
-export class DiscernModal {
+export class CoffeeModal {
   constructor({ onAsk } = {}) {
     this.onAsk = onAsk || (() => {});
     this.host = null;
@@ -23,7 +23,7 @@ export class DiscernModal {
   async _ensureMounted() {
     if (this.host) return;
     this.host = document.createElement('div');
-    this.host.id = 'discern-modal-host';
+    this.host.id = 'coffee-modal-host';
     this.host.style.cssText = 'all: initial; position: fixed; inset: 0; z-index: 2147483646;';
     this.root = this.host.attachShadow({ mode: 'open' });
 
@@ -132,10 +132,10 @@ function shell(inner, result) {
     : '';
   return `
   <div class="backdrop">
-    <div class="panel" role="dialog" aria-label="Discern analysis">
+    <div class="panel" role="dialog" aria-label="Coffee analysis">
       <div class="header">
-        <span class="logo">🔍</span>
-        <span class="title">Discern</span>
+        <span class="logo">☕</span>
+        <span class="title">Coffee</span>
         <span class="spacer"></span>
         <span class="meta">${esc(meta)}</span>
         <button class="close" aria-label="Close">×</button>

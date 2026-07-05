@@ -1,4 +1,4 @@
-/* Styles for the Discern response modal. Loaded into a shadow root so nothing
+/* Styles for the Coffee response modal. Loaded into a shadow root so nothing
    here can leak onto — or be overridden by — the host page. */
 
 :host { all: initial; }

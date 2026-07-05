@@ -18,7 +18,7 @@ export const factcheckAgent = {
   async run(input, ctx) {
     const { config } = ctx;
     if (!config.agents?.factcheck) {
-      return { agent: 'factcheck', disabled: true, message: 'Fact-check agent is off. Enable it in Discern settings.', verdicts: [] };
+      return { agent: 'factcheck', disabled: true, message: 'Fact-check agent is off. Enable it in Coffee settings.', verdicts: [] };
     }
 
     const factual = (input.claims || [])

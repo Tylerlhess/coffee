@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Discern — Sort Opinion from Fact",
+  "name": "Coffee — Wake People Up to Their News",
   "version": "0.1.0",
   "description": "Detects argumentative language, opinions-presented-as-fact, and logical fallacies on articles and social feeds, then queries an LLM (OpenAI / MCP standards) for analysis.",
   "minimum_chrome_version": "116",
@@ -11,7 +11,7 @@
     "type": "module"
   },
   "action": {
-    "default_title": "Discern",
+    "default_title": "Coffee",
     "default_popup": "src/ui/popup/popup.html",
     "default_icon": {
       "16": "assets/icons/icon-16.png",

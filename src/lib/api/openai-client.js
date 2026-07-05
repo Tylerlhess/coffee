@@ -17,7 +17,7 @@ const REQUEST_TIMEOUT_MS = 60_000;
  * @returns {Promise<{ data: object, raw: string, usage?: object }>}
  */
 export async function chatJson(cfg, messages, opts = {}) {
-  if (!cfg.apiKey) throw new Error('No OpenAI API key configured. Open Discern settings.');
+  if (!cfg.apiKey) throw new Error('No OpenAI API key configured. Open Coffee settings.');
   const url = joinUrl(cfg.baseUrl, '/chat/completions');
 
   const body = {

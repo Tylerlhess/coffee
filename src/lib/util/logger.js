@@ -3,7 +3,7 @@
  * everything in one place for production builds.
  */
 
-const PREFIX = '[Discern]';
+const PREFIX = '[Coffee]';
 const ENABLED = true;
 
 export const log = {

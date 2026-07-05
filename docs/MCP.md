@@ -1,6 +1,6 @@
 # MCP integration contract
 
-Discern speaks the **Model Context Protocol** over the **Streamable HTTP**
+Coffee speaks the **Model Context Protocol** over the **Streamable HTTP**
 transport (JSON-RPC 2.0). When the provider is set to `mcp`, every analysis is a
 single `tools/call`.
 
@@ -14,7 +14,7 @@ The client (`src/lib/api/mcp-client.js`) performs, against your configured
    {
      "protocolVersion": "2025-06-18",
      "capabilities": { "tools": {} },
-     "clientInfo": { "name": "Discern", "version": "0.1.0" }
+     "clientInfo": { "name": "Coffee", "version": "0.1.0" }
    }
    ```
    If the server returns an `Mcp-Session-Id` header, it is echoed on every
@@ -28,7 +28,7 @@ supported. A bearer token from the settings is sent as `Authorization` when set.
 
 ## The analysis tool
 
-Default tool name: **`analyze_text`** (configurable). Discern calls it with:
+Default tool name: **`analyze_text`** (configurable). Coffee calls it with:
 
 ```json
 {
@@ -87,4 +87,4 @@ schemas the same way and remain transport-agnostic.
 ```
 
 Any compliant MCP framework (the official TypeScript/Python SDKs) can expose
-this tool; Discern only requires the handshake and result shape above.
+this tool; Coffee only requires the handshake and result shape above.

@@ -10,9 +10,7 @@ Coffee is a browser extension designed to help people critically evaluate what t
 4. **Evidence & research** — Point you toward supporting or contradicting evidence and suggest lines of inquiry.
 5. **AI-powered investigation** — Send page content to a language model for a structured summary of claims, fallacies, and follow-up questions.
 
-The current codebase implements this vision as **Discern** — a Manifest V3 extension with no build step, no bundler, and no runtime dependencies (vanilla ES modules only, which keeps the supply chain trivially auditable).
-
-Discern:
+Coffee is a Manifest V3 browser extension with no build step, no bundler, and no runtime dependencies (vanilla ES modules only, which keeps the supply chain trivially auditable). It:
 
 - **Highlights argumentative language** in-page using fast local pattern matching
   (opinion markers, overstated certainty, sweeping generalizations, prescriptive
@@ -36,7 +34,7 @@ Discern:
 1. Open `chrome://extensions` (Chrome/Edge/Brave).
 2. Toggle **Developer mode** on.
 3. **Load unpacked** → select this folder.
-4. Click the Discern toolbar icon → **Settings & API keys** and configure a
+4. Click the Coffee toolbar icon → **Settings & API keys** and configure a
    provider (see below).
 
 > Firefox: the code is standard MV3; load via `about:debugging` → *This Firefox*
@@ -81,7 +79,7 @@ service worker reads them and talks to the network.
 - **Toolbar (bottom-right of any page):** `🔍 Scan` highlights argumentative
   language locally; `⚖️ Analyze` sends the page to the LLM.
 - **Popup (toolbar icon):** the same actions plus agent status.
-- **Right-click a selection → "Discern: analyze selection."**
+- **Right-click a selection → "Coffee: analyze selection."**
 - On **x.com / twitter.com**, the thread adapter extracts each post (with
   authors) and the modal's questions show **"Ask Grok"**, which inserts
   `@grok <question>` into the reply box for you to send.

@@ -19,7 +19,7 @@
   const u = (p) => chrome.runtime.getURL(p);
 
   // Dynamically import shared modules (all listed in web_accessible_resources).
-  const [{ extractPage, segmentsToText, getAdapter }, { detect }, highlighter, { DiscernModal }] =
+  const [{ extractPage, segmentsToText, getAdapter }, { detect }, highlighter, { CoffeeModal }] =
     await Promise.all([
       import(u('src/lib/text/extractor.js')),
       import(u('src/lib/text/detectors.js')),
@@ -28,9 +28,9 @@
     ]);
 
   const MSG = {
-    ANALYZE: 'discern:analyze',
-    GET_CONFIG: 'discern:getConfig',
-    SCAN_REQUEST: 'discern:scanRequest',
+    ANALYZE: 'coffee:analyze',
+    GET_CONFIG: 'coffee:getConfig',
+    SCAN_REQUEST: 'coffee:scanRequest',
   };
 
   const send = (type, payload = {}) =>
@@ -43,7 +43,7 @@
       });
     });
 
-  const modal = new DiscernModal({ onAsk: handleAsk });
+  const modal = new CoffeeModal({ onAsk: handleAsk });
   let config = null;
   try {
     config = await send(MSG.GET_CONFIG);
@@ -68,9 +68,9 @@
   // --- actions -------------------------------------------------------------
 
   function injectToolbar() {
-    if (document.getElementById('discern-toolbar')) return;
+    if (document.getElementById('coffee-toolbar')) return;
     const bar = document.createElement('div');
-    bar.id = 'discern-toolbar';
+    bar.id = 'coffee-toolbar';
     bar.innerHTML = `
       <button data-act="scan" title="Highlight argumentative language on this page">🔍 Scan</button>
       <button data-act="analyze" title="Send page to the LLM analyzer">⚖️ Analyze</button>`;
@@ -146,10 +146,10 @@
   }
 
   function toast(message) {
-    let t = document.getElementById('discern-toast');
+    let t = document.getElementById('coffee-toast');
     if (!t) {
       t = document.createElement('div');
-      t.id = 'discern-toast';
+      t.id = 'coffee-toast';
       document.documentElement.appendChild(t);
     }
     t.textContent = message;

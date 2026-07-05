@@ -4,11 +4,11 @@
  */
 
 export const MSG = Object.freeze({
-  ANALYZE: 'discern:analyze',
-  PING: 'discern:ping',
-  GET_CONFIG: 'discern:getConfig',
-  LIST_AGENTS: 'discern:listAgents',
-  SCAN_REQUEST: 'discern:scanRequest', // background -> content (toolbar/menu)
+  ANALYZE: 'coffee:analyze',
+  PING: 'coffee:ping',
+  GET_CONFIG: 'coffee:getConfig',
+  LIST_AGENTS: 'coffee:listAgents',
+  SCAN_REQUEST: 'coffee:scanRequest', // background -> content (toolbar/menu)
 });
 
 /**

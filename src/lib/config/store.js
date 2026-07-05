@@ -6,7 +6,7 @@
 
 import { withDefaults, DEFAULT_CONFIG } from './defaults.js';
 
-const STORAGE_KEY = 'discern.config';
+const STORAGE_KEY = 'coffee.config';
 
 export async function getConfig() {
   const raw = await chrome.storage.local.get(STORAGE_KEY);
