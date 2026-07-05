@@ -1,0 +1,52 @@
+{
+  "track": "fallacy",
+  "version": 1,
+  "vendored": true,
+  "localRoot": "upstream/smartybench",
+  "upstream": {
+    "repo": "ltroin/Smartybench",
+    "branch": "main",
+    "url": "https://github.com/ltroin/Smartybench",
+    "dynamicGeneration": {
+      "prologOracle": "PrologPrompt/fallacies.pl",
+      "promptTemplates": "PrologPrompt/prompt.py",
+      "description": "Prolog pairs → natural language → optional res/*.json labels"
+    }
+  },
+  "slices": [
+    {
+      "file": "fallacy/llm_generation_2_2.csv",
+      "annotations": "res/claude_3_7_sonnet_2_2.json",
+      "documentLabel": "fallacy",
+      "approxRows": 219,
+      "defaultExpect": {
+        "shouldFlag": true,
+        "categoriesAny": ["fallacy"],
+        "softPass": true
+      }
+    },
+    {
+      "file": "fallacy/good.csv",
+      "annotations": "res/claude_3_7_sonnet_good.json",
+      "documentLabel": "fact",
+      "approxRows": 500,
+      "defaultExpect": {
+        "shouldFlag": false,
+        "maxSpans": 0,
+        "forbiddenCategories": ["fallacy"]
+      }
+    },
+    {
+      "file": "statistics/ruozhiba_label_final.csv",
+      "documentLabel": "fallacy",
+      "approxRows": 100,
+      "defaultExpect": {
+        "shouldFlag": true,
+        "categoriesAny": ["fallacy"],
+        "softPass": true
+      }
+    }
+  ],
+  "committedSamples": "samples.jsonl",
+  "typeMap": "fallacy-type-map.json"
+}

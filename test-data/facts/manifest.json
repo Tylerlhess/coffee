@@ -1,0 +1,47 @@
+{
+  "track": "fact",
+  "version": 1,
+  "vendored": true,
+  "localRoot": "upstream/subj",
+  "upstream": {
+    "repo": "1024er/cbert_aug",
+    "branch": "crayon",
+    "path": "datasets/subj",
+    "url": "https://github.com/1024er/cbert_aug/tree/crayon/datasets/subj"
+  },
+  "slices": [
+    {
+      "file": "dev.tsv",
+      "labelFilter": 0,
+      "documentLabel": "fact",
+      "approxRows": 450,
+      "defaultExpect": {
+        "shouldFlag": false,
+        "maxSpans": 2,
+        "forbiddenCategories": ["fallacy"]
+      }
+    },
+    {
+      "file": "test.tsv",
+      "labelFilter": 0,
+      "documentLabel": "fact",
+      "approxRows": 500,
+      "defaultExpect": {
+        "shouldFlag": false,
+        "maxSpans": 2,
+        "forbiddenCategories": ["fallacy"]
+      }
+    },
+    {
+      "file": "train.tsv",
+      "labelFilter": 0,
+      "documentLabel": "fact",
+      "approxRows": 4050,
+      "defaultExpect": {
+        "shouldFlag": false,
+        "maxSpans": 2
+      }
+    }
+  ],
+  "committedSamples": "samples.jsonl"
+}

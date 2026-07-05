@@ -1,0 +1,90 @@
+{
+  "vendored": true,
+  "offline": true,
+  "pinnedAt": "2026-07-05",
+  "sources": [
+    {
+      "name": "cbert_aug/subj",
+      "repo": "https://github.com/1024er/cbert_aug",
+      "ref": "crayon",
+      "path": "datasets/subj"
+    },
+    {
+      "name": "smartybench",
+      "repo": "https://github.com/ltroin/Smartybench",
+      "ref": "main"
+    }
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 964,
+      "sha256": "c3af18d98a3b45edf7c8214a2df77b45e8ae2188f1b1c3a9c79e27337c9ed7cc"
+    },
+    {
+      "path": "smartybench/PrologPrompt/conversion.py",
+      "bytes": 1077,
+      "sha256": "67a1b8ceb8c1c6e6647b19f52068b9b6d6ffc80e3ae4fcb4f5cbb1058097c726"
+    },
+    {
+      "path": "smartybench/PrologPrompt/fallacies.pl",
+      "bytes": 52791,
+      "sha256": "5d251e19da420feb7998c93fcf7c3ec4bbcf8d12c448ab9d5a1d63025ae49942"
+    },
+    {
+      "path": "smartybench/PrologPrompt/prompt.py",
+      "bytes": 6733,
+      "sha256": "8729e1eea164f978de966075e956d420e5653c3adc87292d11d7347b4186ad0b"
+    },
+    {
+      "path": "smartybench/README.md",
+      "bytes": 2255,
+      "sha256": "cccae6b347ac975db2294bb2e08bfe0cfc929de745d505b8cf60276a2539a0d7"
+    },
+    {
+      "path": "smartybench/fallacy/good.csv",
+      "bytes": 67380,
+      "sha256": "878687f1538024b89ff2ba96c7c17de81c59dba2e8f272ac6be567e5925d4743"
+    },
+    {
+      "path": "smartybench/fallacy/llm_generation_2_2.csv",
+      "bytes": 32936,
+      "sha256": "d91bcddf33e59d5af269aed3b93a723c5b9ea1502a083068e0df122f9f5ee4aa"
+    },
+    {
+      "path": "smartybench/res/claude_3_7_sonnet_2_2.json",
+      "bytes": 218159,
+      "sha256": "7ae4a4b076cec6d2f85d204d24377399fc19a6c77be65c9b7e39671f1f7ddf4d"
+    },
+    {
+      "path": "smartybench/res/claude_3_7_sonnet_good.json",
+      "bytes": 408282,
+      "sha256": "d931dfd8d7f1544350c47011fe43c222c7bef74ced3ce9637b73ae675b58cb9e"
+    },
+    {
+      "path": "smartybench/statistics/ruozhiba_label_final.csv",
+      "bytes": 155234,
+      "sha256": "f2d7d898d33343a8f6cd21c46aec0e5bae573eec9458185aa72b849065da6f41"
+    },
+    {
+      "path": "subj/dev.tsv",
+      "bytes": 117015,
+      "sha256": "d2cc54f7f1db9db3859489837f55ed38d4b90d207763439a9067af74fec1a9ef"
+    },
+    {
+      "path": "subj/test.tsv",
+      "bytes": 132870,
+      "sha256": "8bf928dec325a33ac6b2e681c31a057004734a4302f437dfa13d656b93f5c88e"
+    },
+    {
+      "path": "subj/train.tsv",
+      "bytes": 1072154,
+      "sha256": "0e9ccfd45e05560fd6e664130f1d65d5d35b890cb19dba16896d660c8bde8f6e"
+    },
+    {
+      "path": "subj/train_dev.tsv",
+      "bytes": 1189153,
+      "sha256": "8fc0c40f080f19c7ce7ba357d1d7418c016d454cf6eaf30a8070f14ea76bfaea"
+    }
+  ]
+}

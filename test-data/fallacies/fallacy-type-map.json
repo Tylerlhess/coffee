@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "description": "SmartyPat-Bench fallacy types → Coffee detectors.js fallacy span labels",
+  "coffeeLabels": [
+    "Straw man",
+    "Whataboutism / tu quoque",
+    "Slippery slope",
+    "False dilemma",
+    "Appeal to authority (uncited)",
+    "No true Scotsman",
+    "Bandwagon",
+    "Ad hominem",
+    "Post hoc (correlation ≠ causation)"
+  ],
+  "smartyPatPrologTypes": [
+    "accident_fallacy",
+    "false_analogy",
+    "false_premise",
+    "improper_transposition",
+    "false_cause",
+    "wrong_direction",
+    "inverse_error",
+    "improper_dist",
+    "fallacy_of_composition",
+    "contextomy",
+    "begging_the_question"
+  ],
+  "mappings": [
+    {
+      "smartyPat": "Accident fallacy",
+      "coffee": ["Slippery slope"],
+      "coverage": "partial",
+      "notes": "Rigid rule → extreme consequence; may not match cue phrases"
+    },
+    {
+      "smartyPat": "False Analogy",
+      "coffee": [],
+      "coverage": "gap"
+    },
+    {
+      "smartyPat": "False Premise",
+      "coffee": [],
+      "coverage": "gap"
+    },
+    {
+      "smartyPat": "Equivocation",
+      "coffee": [],
+      "coverage": "gap"
+    },
+    {
+      "smartyPat": "False cause",
+      "coffee": ["Post hoc (correlation ≠ causation)"],
+      "coverage": "partial"
+    },
+    {
+      "smartyPat": "Bandwagon",
+      "coffee": ["Bandwagon"],
+      "coverage": "direct"
+    },
+    {
+      "smartyPat": "Appeal to authority",
+      "coffee": ["Appeal to authority (uncited)"],
+      "coverage": "partial",
+      "notes": "Requires uncited experts/studies phrasing"
+    }
+  ]
+}

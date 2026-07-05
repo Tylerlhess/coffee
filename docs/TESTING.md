@@ -3,6 +3,22 @@
 The text layer (`detectors`, `fluff`, `prompts`, `builder`) is pure ES modules
 with no DOM or `chrome` dependencies, so it can be exercised directly in Node.
 
+## Detection engine test suite (planned)
+
+Source materials for facts, opinions, and fallacy detection live under
+[`docs/testing/`](testing/README.md) and [`test-data/`](../test-data/README.md).
+
+Three tracks:
+
+| Track | Vendored corpus | Smoke samples |
+| --- | --- | --- |
+| Facts | `test-data/upstream/subj/` (`label=0`) | `test-data/facts/samples.jsonl` |
+| Opinions | `test-data/upstream/subj/` (`label=1`) | `test-data/opinions/samples.jsonl` |
+| Fallacies | `test-data/upstream/smartybench/` | `test-data/fallacies/samples.jsonl` |
+
+All upstream data is committed (~3.5 MB). Checksums: `test-data/SOURCES.lock.json`.
+No network required.
+
 ## Syntax check
 
 ```bash
