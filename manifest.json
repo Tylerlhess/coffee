@@ -1,28 +1,51 @@
 {
   "manifest_version": 3,
-  "name": "Coffee - News Fact Checker",
-  "version": "1.0.0",
-  "description": "Evaluate news articles for facts, opinions, fallacies, and evidence. Wake up to critical thinking.",
-  "permissions": [
-    "activeTab",
-    "storage"
-  ],
+  "name": "Discern — Sort Opinion from Fact",
+  "version": "0.1.0",
+  "description": "Detects argumentative language, opinions-presented-as-fact, and logical fallacies on articles and social feeds, then queries an LLM (OpenAI / MCP standards) for analysis.",
+  "minimum_chrome_version": "116",
+  "permissions": ["storage", "activeTab", "scripting", "contextMenus"],
+  "host_permissions": ["https://*/*", "http://*/*"],
+  "background": {
+    "service_worker": "src/background/service-worker.js",
+    "type": "module"
+  },
   "action": {
-    "default_popup": "popup.html",
-    "default_title": "Coffee - Analyze This!"
+    "default_title": "Discern",
+    "default_popup": "src/ui/popup/popup.html",
+    "default_icon": {
+      "16": "assets/icons/icon-16.png",
+      "32": "assets/icons/icon-32.png",
+      "48": "assets/icons/icon-48.png",
+      "128": "assets/icons/icon-128.png"
+    }
+  },
+  "options_ui": {
+    "page": "src/ui/options/options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "assets/icons/icon-16.png",
+    "32": "assets/icons/icon-32.png",
+    "48": "assets/icons/icon-48.png",
+    "128": "assets/icons/icon-128.png"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "js": ["src/content/content.js"],
+      "css": ["src/content/content.css"],
+      "run_at": "document_idle"
     }
   ],
-  "background": {
-    "service_worker": "background.js"
-  },
-  "icons": {
-    "16": "icon128.png",
-    "48": "icon128.png",
-    "128": "icon128.png"
-  }
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "src/lib/*",
+        "src/ui/modal/*",
+        "assets/*"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }

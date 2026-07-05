@@ -1,0 +1,126 @@
+/* Styles for the Discern response modal. Loaded into a shadow root so nothing
+   here can leak onto — or be overridden by — the host page. */
+
+:host { all: initial; }
+
+* { box-sizing: border-box; }
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  z-index: 2147483646;
+  display: flex;
+  justify-content: flex-end;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.panel {
+  width: min(460px, 100vw);
+  height: 100%;
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  animation: slidein 0.18s ease-out;
+}
+
+@keyframes slidein { from { transform: translateX(24px); opacity: 0.4; } to { transform: none; opacity: 1; } }
+
+@media (prefers-color-scheme: dark) {
+  .panel { background: #0f172a; color: #e2e8f0; }
+  .header, .footer { border-color: #1e293b; }
+  .tab { color: #94a3b8; }
+  .card { background: #1e293b; }
+  .pill { background: #334155; color: #e2e8f0; }
+  .qitem { background: #1e293b; }
+  button.copy { background: #1e293b; color: #e2e8f0; border-color: #334155; }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+.header .logo { font-size: 18px; }
+.header .title { font-weight: 700; font-size: 15px; }
+.header .spacer { flex: 1; }
+.header .meta { font-size: 11px; color: #64748b; }
+.close {
+  cursor: pointer; border: none; background: transparent; font-size: 20px;
+  line-height: 1; color: inherit; padding: 4px 8px; border-radius: 6px;
+}
+.close:hover { background: rgba(100,116,139,0.15); }
+
+.tabs { display: flex; gap: 2px; padding: 8px 12px 0; border-bottom: 1px solid #e2e8f0; }
+.tab {
+  cursor: pointer; border: none; background: transparent; padding: 8px 12px;
+  font-size: 13px; font-weight: 600; color: #64748b; border-bottom: 2px solid transparent;
+}
+.tab[aria-selected="true"] { color: #2563eb; border-bottom-color: #2563eb; }
+.tab .count {
+  font-size: 11px; background: #e2e8f0; color: #0f172a; border-radius: 10px;
+  padding: 1px 6px; margin-left: 4px;
+}
+
+.body { flex: 1; overflow-y: auto; padding: 14px 16px; }
+.panelview { display: none; }
+.panelview.active { display: block; }
+
+.summary { font-size: 14px; line-height: 1.5; margin: 0 0 12px; }
+
+.card {
+  background: #f1f5f9; border-radius: 10px; padding: 10px 12px; margin-bottom: 10px;
+}
+.card .claimtext { font-size: 13.5px; line-height: 1.45; margin: 0 0 6px; }
+.card .rationale { font-size: 12px; color: #475569; margin: 4px 0 0; }
+.card .investigate { font-size: 12px; margin-top: 6px; }
+.card .investigate b { color: #0f766e; }
+
+.pill {
+  display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px;
+  border-radius: 999px; background: #e2e8f0; text-transform: uppercase; letter-spacing: 0.02em;
+}
+.pill.fact { background: #dcfce7; color: #166534; }
+.pill.opinion { background: #e0e7ff; color: #3730a3; }
+.pill.opinion-as-fact { background: #fee2e2; color: #991b1b; }
+.pill.unverified { background: #fef9c3; color: #854d0e; }
+.pill.prediction { background: #cffafe; color: #155e75; }
+
+.fallacy .name { font-weight: 700; font-size: 13.5px; }
+.fallacy .sev { font-size: 11px; float: right; }
+.fallacy .excerpt { font-style: italic; color: #475569; font-size: 12.5px; margin: 4px 0; }
+
+.qitem {
+  background: #f1f5f9; border-radius: 8px; padding: 8px 10px; margin-bottom: 8px;
+  display: flex; gap: 8px; align-items: flex-start; font-size: 13px; line-height: 1.4;
+}
+.qitem button.ask {
+  margin-left: auto; flex: none; cursor: pointer; font-size: 11px; font-weight: 600;
+  border: 1px solid #2563eb; color: #2563eb; background: transparent; border-radius: 6px;
+  padding: 3px 8px;
+}
+.qitem button.ask:hover { background: #2563eb; color: #fff; }
+
+.empty { color: #64748b; font-size: 13px; padding: 16px 0; text-align: center; }
+
+.footer {
+  border-top: 1px solid #e2e8f0; padding: 10px 16px; display: flex; gap: 8px; align-items: center;
+  font-size: 11px; color: #64748b;
+}
+button.copy {
+  cursor: pointer; border: 1px solid #cbd5e1; background: #f8fafc; color: #0f172a;
+  border-radius: 6px; padding: 5px 10px; font-size: 12px; font-weight: 600;
+}
+
+.loading { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 40px 0; }
+.spinner {
+  width: 28px; height: 28px; border: 3px solid #cbd5e1; border-top-color: #2563eb;
+  border-radius: 50%; animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.error { color: #b91c1c; font-size: 13px; background: #fef2f2; border-radius: 8px; padding: 10px 12px; }
+.raw { white-space: pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: #475569; }

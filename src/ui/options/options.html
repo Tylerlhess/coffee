@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="options.css" />
+    <title>Discern — Settings</title>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>🔍 Discern Settings</h1>
+        <p class="sub">Configure the LLM provider, detection, and agents. Keys are stored locally in your browser and never sent to any server except the provider you choose.</p>
+      </header>
+
+      <section>
+        <h2>Provider</h2>
+        <div class="row">
+          <label for="provider">Transport standard</label>
+          <select id="provider">
+            <option value="openai">OpenAI-compatible (Chat Completions)</option>
+            <option value="mcp">MCP server (Streamable HTTP)</option>
+          </select>
+        </div>
+
+        <fieldset id="openai-fields">
+          <legend>OpenAI-compatible</legend>
+          <div class="row"><label for="openai-baseUrl">Base URL</label>
+            <input id="openai-baseUrl" type="url" placeholder="https://api.openai.com/v1" /></div>
+          <div class="row"><label for="openai-apiKey">API key</label>
+            <input id="openai-apiKey" type="password" placeholder="sk-…" autocomplete="off" /></div>
+          <div class="row"><label for="openai-model">Model</label>
+            <input id="openai-model" type="text" placeholder="gpt-4o-mini" /></div>
+          <div class="row"><label for="openai-temperature">Temperature</label>
+            <input id="openai-temperature" type="number" step="0.1" min="0" max="2" /></div>
+          <div class="row checkbox"><label><input id="openai-useJsonResponseFormat" type="checkbox" /> Request strict JSON (<code>response_format</code>)</label></div>
+        </fieldset>
+
+        <fieldset id="mcp-fields">
+          <legend>MCP server</legend>
+          <div class="row"><label for="mcp-endpoint">Endpoint</label>
+            <input id="mcp-endpoint" type="url" placeholder="https://your-host/mcp" /></div>
+          <div class="row"><label for="mcp-apiKey">API key / token</label>
+            <input id="mcp-apiKey" type="password" placeholder="optional" autocomplete="off" /></div>
+          <div class="row"><label for="mcp-toolName">Analysis tool name</label>
+            <input id="mcp-toolName" type="text" placeholder="analyze_text" /></div>
+        </fieldset>
+
+        <div class="actions">
+          <button class="ghost" id="test">Test connection</button>
+          <span id="test-result" class="test-result"></span>
+        </div>
+      </section>
+
+      <section>
+        <h2>Detection</h2>
+        <div class="row"><label for="sensitivity">Sensitivity</label>
+          <select id="sensitivity">
+            <option value="low">Low — only the strongest signals</option>
+            <option value="medium">Medium</option>
+            <option value="high">High — flag aggressively</option>
+          </select></div>
+        <div class="row checkbox"><label><input id="showToolbar" type="checkbox" /> Show floating toolbar on pages</label></div>
+        <div class="row checkbox"><label><input id="highlightOnLoad" type="checkbox" /> Auto-highlight when a page loads</label></div>
+      </section>
+
+      <section>
+        <h2>Analysis query</h2>
+        <div class="row checkbox"><label><input id="detectOpinionAsFact" type="checkbox" /> Classify opinion vs. fact (and opinion-as-fact)</label></div>
+        <div class="row checkbox"><label><input id="detectFallacies" type="checkbox" /> Detect &amp; name logical fallacies</label></div>
+        <div class="row checkbox"><label><input id="suggestQuestions" type="checkbox" /> Suggest follow-up questions</label></div>
+        <div class="row"><label for="maxChars">Max characters per query</label>
+          <input id="maxChars" type="number" min="500" max="60000" step="500" /></div>
+      </section>
+
+      <section>
+        <h2>Agents <span class="hint">(extensible)</span></h2>
+        <p class="sub">The analyzer is always on. Research &amp; fact-check are scaffolds that activate once a capable provider/tool is configured.</p>
+        <div class="row checkbox"><label><input id="agent-analyze" type="checkbox" disabled checked /> Opinion / Fact Analyzer</label></div>
+        <div class="row checkbox"><label><input id="agent-research" type="checkbox" /> Research (experimental)</label></div>
+        <div class="row checkbox"><label><input id="agent-factcheck" type="checkbox" /> Fact-check (experimental)</label></div>
+      </section>
+
+      <div class="footer">
+        <button class="primary" id="save">Save settings</button>
+        <button class="ghost" id="reset">Reset to defaults</button>
+        <span id="save-result" class="test-result"></span>
+      </div>
+    </div>
+
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

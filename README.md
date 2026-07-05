@@ -1,96 +1,185 @@
-# Coffee - News Fact Checker Chrome Extension
+# 🔍 Discern — Sort Opinion from Fact
 
-Coffee is a Chrome extension designed to help users critically evaluate news articles by identifying facts, opinions, logical fallacies, and evidence. The extension aims to "wake people up to their news" by providing tools for media literacy and critical thinking.
+A Manifest V3 browser extension that helps readers cut through confusing or
+misleading social-media threads and articles. It:
 
-## Features
+- **Highlights argumentative language** in-page using fast local pattern matching
+  (opinion markers, overstated certainty, sweeping generalizations, prescriptive
+  claims, loaded language, and logical-fallacy cue phrases).
+- **Strips fluff** (boilerplate, calls-to-action, URLs, emoji, markdown) and
+  builds a **concise LLM query** that explicitly asks the model to separate
+  facts from opinions, flag **opinions presented as facts**, and **name logical
+  fallacies**.
+- Sends the page, a selection, or an X/Twitter thread to an LLM over the
+  **OpenAI** (Chat Completions) **or MCP** (Model Context Protocol) standard.
+- Renders the result in an isolated **response modal** with tabs for Summary,
+  Claims, Fallacies, and suggested follow-up **Questions** — including an
+  **"Ask Grok"** action that drops a question into the X reply composer.
+- Is built as an **extensible agent system** so research and fact-check agents
+  can be added without touching the transport or UI layers.
 
-### 1. Fact Identification
-- Highlights factual statements in articles
-- Provides confidence levels for each identified fact
-- Distinguishes facts from opinions
+No build step. No bundler. No runtime dependencies — vanilla ES modules only,
+which keeps the supply chain trivially auditable.
 
-### 2. Opinion Detection
-- Identifies opinion-based statements
-- Labels statements as subjective or subjective
-- Provides confidence scores
+---
 
-### 3. Logical Fallacy Detection
-- Detects common logical fallacies
-- Highlights reasoning errors
-- Provides explanations for each fallacy found
+## Install (developer / unpacked)
 
-### 4. Evidence Research
-- Searches for supporting and contradicting evidence
-- Provides source reliability information
-- Shows relevance scores
+1. Open `chrome://extensions` (Chrome/Edge/Brave).
+2. Toggle **Developer mode** on.
+3. **Load unpacked** → select this folder.
+4. Click the Discern toolbar icon → **Settings & API keys** and configure a
+   provider (see below).
 
-### 5. AI-Powered Investigation
-- Analyzes articles with artificial intelligence
-- Provides summary of key findings
-- Offers recommendations for further research
+> Firefox: the code is standard MV3; load via `about:debugging` → *This Firefox*
+> → *Load Temporary Add-on* and pick `manifest.json`.
 
-## Installation
+---
 
-1. Download or clone this repository
-2. Open Chrome and navigate to `chrome://extensions/`
-3. Enable "Developer mode"
-4. Click "Load unpacked"
-5. Select the project directory
+## Configure a provider
 
-## Usage
+Open **Settings**. Choose one transport:
 
-1. Click the Coffee icon in the Chrome toolbar
-2. The extension will analyze the current page
-3. View results in the popup interface:
-   - Facts: Green highlights
-   - Opinions: Yellow highlights
-   - Fallacies: Red highlights
-   - Evidence: Blue highlights
-4. Use the Search tab to research specific claims
-5. Use the Investigate tab for AI-powered analysis
+### OpenAI-compatible
+Works with OpenAI and any compatible gateway (Azure OpenAI, Groq, Together,
+OpenRouter, or a local `llama.cpp` / Ollama OpenAI shim).
 
-## Technical Details
+| Field | Example |
+| --- | --- |
+| Base URL | `https://api.openai.com/v1` |
+| API key | `sk-…` |
+| Model | `gpt-4o-mini` |
 
-### Architecture
-- **Manifest v3**: Uses Chrome Extension Manifest v3
-- **Service Worker**: Background processing
-- **Content Scripts**: Page analysis
-- **Popup UI**: User interface
+### MCP server (Streamable HTTP)
+Point at an MCP server exposing a JSON-returning analysis tool. The client
+performs `initialize` → `notifications/initialized` → `tools/call` and parses
+the tool result (`structuredContent` or text JSON). See
+[`docs/MCP.md`](docs/MCP.md) for the tool contract.
 
-### Files
-- `manifest.json`: Extension configuration
-- `content.js`: Page analysis
-- `background.js`: Extension logic
-- `popup.html`: User interface
-- `popup.js`: Popup interactions
+| Field | Example |
+| --- | --- |
+| Endpoint | `https://your-host/mcp` |
+| API key | (optional bearer token) |
+| Analysis tool name | `analyze_text` |
 
-## Roadmap
+Use **Test connection** to verify before saving. **Keys are stored in
+`chrome.storage.local` and never enter page context** — only the background
+service worker reads them and talks to the network.
 
-### Phase 1: Core Analysis
-- [x] Basic extension structure
-- [x] Page content analysis
-- [x] Fact/opinion identification
-- [x] Fallacy detection
-- [x] Evidence search
+---
 
-### Phase 2: AI Enhancement
-- [ ] Integration with AI services
-- [ ] Natural language processing
-- [ ] Enhanced fact-checking
+## Use it
 
-### Phase 3: Advanced Features
-- [ ] Cross-referencing with multiple sources
-- [ ] Sentiment analysis
-- [ ] Social sharing of analyses
+- **Toolbar (bottom-right of any page):** `🔍 Scan` highlights argumentative
+  language locally; `⚖️ Analyze` sends the page to the LLM.
+- **Popup (toolbar icon):** the same actions plus agent status.
+- **Right-click a selection → "Discern: analyze selection."**
+- On **x.com / twitter.com**, the thread adapter extracts each post (with
+  authors) and the modal's questions show **"Ask Grok"**, which inserts
+  `@grok <question>` into the reply box for you to send.
+
+---
+
+## Architecture
+
+```
+manifest.json                 MV3 manifest (SW module + content script + WAR)
+src/
+  background/service-worker.js Only place with keys + network. Message router.
+  content/                     Toolbar, highlighting, modal mount, Grok routing.
+  lib/
+    config/                    Defaults + chrome.storage store (single source).
+    util/                      Logger + typed message envelope.
+    text/
+      detectors.js             Pure pattern matcher (opinion/fallacy cues).
+      fluff.js                 Boilerplate/markdown/emoji stripping + truncate.
+      extractor.js             Site adapters (X thread / generic article).
+      highlighter.js           TreeWalker-based in-page <mark> wrapping.
+    query/
+      prompts.js               System prompt + JSON analysis schema.
+      builder.js               Raw text → cleaned → provider-ready messages.
+    api/
+      openai-client.js         OpenAI-compatible Chat Completions.
+      mcp-client.js            MCP JSON-RPC over Streamable HTTP.
+      provider.js              Transport-agnostic runAnalysis() + testProvider().
+      json.js                  Tolerant model-JSON extraction.
+    agents/
+      registry.js              Extensible agent registry.
+      analyze-agent.js         Core opinion/fact + fallacy agent.
+      research-agent.js        Scaffold (experimental).
+      factcheck-agent.js       Scaffold (experimental).
+  ui/
+    modal/                     Shadow-DOM response modal (style-isolated).
+    popup/                     Quick actions + agent status.
+    options/                   Full configuration page.
+```
+
+### Data flow
+
+```
+content script ──extract──▶ adapter ──stripFluff──▶ detect (instant highlight)
+       │                                                  │
+       └────────── ANALYZE message ──▶ service worker ──▶ agent ──▶ provider
+                                              │             (OpenAI | MCP)
+       ◀──────── normalized result ───────────┘
+       └──▶ shadow-DOM modal (Summary / Claims / Fallacies / Questions)
+```
+
+### Why these boundaries
+- **Secrets isolation:** keys live only in the SW; the content script gets a
+  redacted config and never sees them.
+- **Pure text layer:** `detectors`/`fluff`/`prompts`/`builder` have no DOM or
+  `chrome` deps, so they run identically in the SW and content script and are
+  unit-testable in plain Node.
+- **Transport seam:** agents call `runAnalysis(config, request)`; swapping
+  OpenAI↔MCP is a config change, not a code change.
+
+---
+
+## Extending it
+
+**Add a new agent** (e.g. a bias profiler):
+
+1. Create `src/lib/agents/bias-agent.js` exporting
+   `{ id, label, description, enabledKey, run(input, ctx) }`.
+2. `registerAgent(biasAgent)` in `src/lib/agents/registry.js`.
+3. Add an `agents.bias` toggle default in `config/defaults.js` and a checkbox in
+   the options page.
+
+The background router, messaging, and UI need **no** changes — they dispatch by
+agent id and render whatever shape the agent returns.
+
+**Add a new site adapter** (e.g. Reddit/YouTube comments): add one object to
+`ADAPTERS` in `src/lib/text/extractor.js` with `matches(host)` and `extract()`.
+
+**Tune detection:** edit the `RULES` array in `src/lib/text/detectors.js`.
+Each rule is `{ category, regex, hint, weight }`; sensitivity thresholds live in
+the same file.
+
+---
+
+## Testing
+
+The pure pipeline runs in Node with no extension context:
+
+```bash
+node --check src/**/*.js                 # syntax
+# or run the smoke test in docs/TESTING.md
+```
+
+---
+
+## Privacy & safety
+
+- The only network calls are to **the provider you configure**. Nothing else is
+  contacted.
+- The local heuristic is a *prompt for scrutiny*, not a verdict — it flags
+  *language*, never truth. The LLM pass is advisory and can be wrong; treat its
+  "facts" as leads to verify, which is exactly what the **Investigate** and
+  **Questions** sections are for.
+- The system prompt instructs the model to stay neutral and to avoid taking an
+  ideological side.
 
 ## License
 
-MIT License
-
-## Contributing
-
-Feel free to fork the repository and submit pull requests to improve the extension.
-
-## Support
-
-For questions or feedback, please create an issue in the repository.
+MIT (see headers). Built with vanilla JS and no third-party runtime code.
